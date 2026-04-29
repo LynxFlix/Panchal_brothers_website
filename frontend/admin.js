@@ -7,7 +7,9 @@
     'use strict';
 
     /* ── CONFIG ─────────────────────────────────────────────── */
-    const API = '/api';
+    const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:5000/api' 
+        : '/api';
 
     /* ── STATE ──────────────────────────────────────────────── */
     let token = localStorage.getItem('pb_admin_token') || '';
