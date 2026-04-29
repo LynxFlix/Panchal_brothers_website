@@ -6,7 +6,7 @@
        e.g. 'https://api.panchalbrothers.com/api'
            or  'https://panchal-backend.onrender.com/api'
     ────────────────────────────────────────────────────── */
-    const API_BASE = 'http://localhost:5000/api';
+    const API_BASE = '/api';
 
     /* ── UTILITY: TOAST ─────────────────────────────────── */
     function toast(msg, duration) {
