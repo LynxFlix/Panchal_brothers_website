@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description"
+    content="Panchal Brothers — Gujarat's trusted industrial chimney manufacturer, transporter and parts supplier. Custom chimneys, pan-India delivery." />
+  <meta name="keywords"
+    content="industrial chimney, chimney manufacturer, Gujarat, chimney parts, chimney transport, Panchal Brothers" />
+  <meta property="og:title" content="Panchal Brothers — Industrial Chimney Experts" />
+  <meta property="og:description"
+    content="Manufacturing, transporting and supplying every part of industrial chimneys since 2005." />
+  <meta property="og:type" content="website" />
+  <title>Panchal Brothers — Industrial Chimney Experts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&family=Syne:wght@400;700;800&family=JetBrains+Mono:wght@300;400&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Favicon -->
+  <link rel="icon"
+    href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' fill='%230A0A0A'/><text x='50%25' y='72%25' text-anchor='middle' font-family='serif' font-weight='bold' font-size='14' fill='%23F5C200'>PB</text></svg>">
+</head>
+
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- Toast -->
+  <div id="toast"></div>
+
+  <!-- WhatsApp Float -->
+  <a href="https://wa.me/919825000000?text=Hello%20Panchal%20Brothers%2C%20I%20need%20a%20chimney%20quote."
+    class="wa-btn" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+    💬<span class="wa-tooltip">Chat on WhatsApp</span>
+  </a>
+
+  <!-- Back to top -->
+  <button id="back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+  <!-- ── NAVBAR ───────────────────────────────────────────── -->
+  <nav id="navbar">
+    <a href="#home" class="nav-logo">
+      <div class="logo-icon"><span></span><span></span><span></span></div>
+      Panchal Brothers
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#contact" class="nav-cta">Get Quote</a>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation" onclick="toggleMobileNav()">
+      <span></span><span></span><span></span>
+    </button>
+  </nav>
+
+  <!-- Mobile Navigation -->
+  <div class="mob-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
+  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+    <ul class="mobile-nav-links">
+      <li><a href="#about" onclick="closeMobileNav()">About</a></li>
+      <li><a href="#services" onclick="closeMobileNav()">Services</a></li>
+      <li><a href="#products" onclick="closeMobileNav()">Products</a></li>
+      <li><a href="#process" onclick="closeMobileNav()">Process</a></li>
+      <li><a href="#why" onclick="closeMobileNav()">Why Us</a></li>
+      <li><a href="#contact" onclick="closeMobileNav()">Contact</a></li>
+    </ul>
+    <a href="#contact" class="mobile-nav-cta" onclick="closeMobileNav()">Get Free Quote →</a>
+  </nav>
+
+  <!-- ── HERO ─────────────────────────────────────────────── -->
+  <section class="hero" id="home">
+    <div class="hero-bg"></div>
+    <div class="chimney-silhouette">
+      <div class="chimney-shape ch1">
+        <div class="smoke-line"></div>
+      </div>
+      <div class="chimney-shape ch2">
+        <div class="smoke-line" style="animation-delay:.8s"></div>
+      </div>
+      <div class="chimney-shape ch3">
+        <div class="smoke-line" style="animation-delay:1.6s"></div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge">Est. 2005 · Padra, Gujarat</div>
+      <h1 class="hero-title">
+        <span class="solid">Industrial</span>
+        <span class="outline">Chimney</span>
+        <span class="solid">Experts</span>
+      </h1>
+      <p class="hero-sub">Manufacturing, transporting and supplying every part of industrial chimneys — engineered for
+        performance, built to last.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn-primary">Explore Services</a>
+        <a href="#contact" class="btn-ghost">Get Free Quote</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num" id="cnt1">0+</div>
+          <div class="stat-label">Chimneys Installed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="cnt2">0+</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="cnt3">0+</div>
+          <div class="stat-label">States Served</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num" id="cnt4">100%</div>
+          <div class="stat-label">Custom Build</div>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>Scroll
+    </div>
+  </section>
+
+  <!-- ── TICKER ────────────────────────────────────────────── -->
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">Chimney Manufacturing</span>
+      <span class="ticker-item">Parts &amp; Components</span>
+      <span class="ticker-item">Transportation &amp; Logistics</span>
+      <span class="ticker-item">Industrial Solutions</span>
+      <span class="ticker-item">Custom Engineering</span>
+      <span class="ticker-item">On-Site Installation</span>
+      <span class="ticker-item">Quality Assured</span>
+      <span class="ticker-item">Panchal Brothers</span>
+      <!-- Duplicated for seamless loop -->
+      <span class="ticker-item">Chimney Manufacturing</span>
+      <span class="ticker-item">Parts &amp; Components</span>
+      <span class="ticker-item">Transportation &amp; Logistics</span>
+      <span class="ticker-item">Industrial Solutions</span>
+      <span class="ticker-item">Custom Engineering</span>
+      <span class="ticker-item">On-Site Installation</span>
+      <span class="ticker-item">Quality Assured</span>
+      <span class="ticker-item">Panchal Brothers</span>
+    </div>
+  </div>
+
+  <!-- ── ABOUT ─────────────────────────────────────────────── -->
+  <section id="about">
+    <div class="section-tag reveal">Who We Are</div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="chimney-graphic">
+          <div class="smoke-p">
+            <div class="sp"></div>
+            <div class="sp"></div>
+            <div class="sp"></div>
+          </div>
+          <div class="cg-bar"></div>
+          <div class="cg-bar"></div>
+          <div class="cg-bar"></div>
+          <div class="cg-bar"></div>
+          <div class="cg-bar"></div>
+          <div class="cg-base"></div>
+        </div>
+      </div>
+      <div class="about-text">
+        <h2 class="section-h reveal">Forged in <span style="color:var(--yellow)">Steel,</span> Driven by Precision</h2>
+        <p class="reveal d1"><strong>Panchal Brothers</strong> is a Gujarat-based industrial chimney company with over
+          18 years of proven expertise. We specialize in end-to-end chimney solutions — from raw manufacturing to
+          delivery and installation.</p>
+        <p class="reveal d2">Our workshop is equipped with heavy-duty fabrication machinery, producing chimneys of any
+          height, diameter and specification. Every component — cowls, liners, flanges, brackets — is crafted
+          in-house.</p>
+        <div class="about-highlights">
+          <div class="hi-item reveal d1">
+            <div class="hi-icon">🏭</div>
+            <div class="hi-text">
+              <strong>In-House Manufacturing</strong>
+              <span>Full production facility with precision CNC and welding equipment</span>
+            </div>
+          </div>
+          <div class="hi-item reveal d2">
+            <div class="hi-icon">🚛</div>
+            <div class="hi-text">
+              <strong>Pan-India Transportation</strong>
+              <span>Specialized fleet for safe, secure chimney delivery across India</span>
+            </div>
+          </div>
+          <div class="hi-item reveal d3">
+            <div class="hi-icon">🔩</div>
+            <div class="hi-text">
+              <strong>All Parts Supplied</strong>
+              <span>Complete chimney component supply from a single trusted source</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── SERVICES ──────────────────────────────────────────── -->
+  <section id="services">
+    <div class="services-intro">
+      <div>
+        <div class="section-tag reveal">What We Do</div>
+        <h2 class="section-h reveal">Our <span style="color:var(--yellow)">Services</span></h2>
+      </div>
+      <p class="services-desc reveal d1">From concept to completion, Panchal Brothers delivers comprehensive chimney
+        solutions tailored to your industrial requirements — no project too large, no specification too complex.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card reveal">
+        <div class="svc-num">01</div>
+        <div class="svc-icon">🏗️</div>
+        <div class="svc-name">Chimney Manufacturing</div>
+        <p class="svc-desc">Custom fabrication of industrial chimneys from MS, SS and alloy steel. Heights from 10m to
+          120m+ with any diameter specification.</p>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-num">02</div>
+        <div class="svc-icon">🔧</div>
+        <div class="svc-name">Parts &amp; Components</div>
+        <p class="svc-desc">Supply of all chimney parts — cowl caps, dampers, flanges, ladders, platforms, spark
+          arrestors, bird guards and liners.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-num">03</div>
+        <div class="svc-icon">🚚</div>
+        <div class="svc-name">Transportation</div>
+        <p class="svc-desc">Specialized heavy-load transport with our own fleet. Secure rigging, escorts and on-time
+          delivery across all Indian states.</p>
+      </div>
+      <div class="svc-card reveal d3">
+        <div class="svc-num">04</div>
+        <div class="svc-icon">⚙️</div>
+        <div class="svc-name">Installation &amp; Erection</div>
+        <p class="svc-desc">On-site erection with experienced crew using cranes and scaffolding. Safety-first
+          methodology on every project site.</p>
+      </div>
+      <div class="svc-card reveal d1">
+        <div class="svc-num">05</div>
+        <div class="svc-icon">🔬</div>
+        <div class="svc-name">Maintenance &amp; Repair</div>
+        <p class="svc-desc">Periodic inspection, relining, patch welding, anti-corrosion coating and structural health
+          assessments for existing chimneys.</p>
+      </div>
+      <div class="svc-card reveal d2">
+        <div class="svc-num">06</div>
+        <div class="svc-icon">📐</div>
+        <div class="svc-name">Design &amp; Consultation</div>
+        <p class="svc-desc">Technical consultation, load calculations, wind analysis and custom design drawing services
+          for new or upgrade projects.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESS ───────────────────────────────────────────── -->
+  <section id="process">
+    <div class="section-tag reveal">How It Works</div>
+    <h2 class="section-h reveal">Our <span style="color:var(--yellow)">Process</span></h2>
+    <div class="process-list">
+      <div class="proc-step reveal">
+        <div class="proc-dot"></div>
+        <div class="proc-num">01</div>
+        <div>
+          <div class="proc-title">Requirement Analysis</div>
+          <p class="proc-desc">We begin with a detailed discussion of your industrial needs — fuel type, emission load,
+            environmental conditions, space constraints and local regulatory requirements.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal d1">
+        <div class="proc-dot"></div>
+        <div class="proc-num">02</div>
+        <div>
+          <div class="proc-title">Design &amp; Engineering</div>
+          <p class="proc-desc">Our engineers prepare detailed fabrication drawings, structural calculations and material
+            specifications. Custom designs created to match your exact site conditions.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal d2">
+        <div class="proc-dot"></div>
+        <div class="proc-num">03</div>
+        <div>
+          <div class="proc-title">Manufacturing</div>
+          <p class="proc-desc">Steel is cut, rolled, welded and assembled at our workshop. Every weld is inspected,
+            shell thickness verified and the chimney is tested before dispatch.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal d3">
+        <div class="proc-dot"></div>
+        <div class="proc-num">04</div>
+        <div>
+          <div class="proc-title">Transportation &amp; Delivery</div>
+          <p class="proc-desc">Finished chimneys are loaded on our specialized heavy transport vehicles and delivered
+            safely to your facility, even to remote industrial sites.</p>
+        </div>
+      </div>
+      <div class="proc-step reveal d4">
+        <div class="proc-dot"></div>
+        <div class="proc-num">05</div>
+        <div>
+          <div class="proc-title">Erection &amp; Handover</div>
+          <p class="proc-desc">Our crew handles crane erection, anchoring and final commissioning. We complete a safety
+            inspection and hand over with full documentation.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PRODUCTS ──────────────────────────────────────────── -->
+  <section id="products">
+    <div class="section-tag reveal">What We Supply</div>
+    <h2 class="section-h reveal">Chimney <span style="color:var(--yellow)">Parts &amp; Products</span></h2>
+    <div class="products-grid">
+      <div class="prod-card reveal">
+        <div class="prod-tag">Structural</div>
+        <div class="prod-icon">🔩</div>
+        <div class="prod-name">Chimney Shell Sections</div>
+        <p class="prod-desc">MS &amp; SS shells in any diameter, pre-drilled flange-ready sections.</p>
+      </div>
+      <div class="prod-card reveal d1">
+        <div class="prod-tag">Top</div>
+        <div class="prod-icon">🎩</div>
+        <div class="prod-name">Cowl Caps</div>
+        <p class="prod-desc">Rain-protection cowls with spark arrestors for safe exhaust flow.</p>
+      </div>
+      <div class="prod-card reveal d2">
+        <div class="prod-tag">Lining</div>
+        <div class="prod-icon">🔥</div>
+        <div class="prod-name">Refractory Liners</div>
+        <p class="prod-desc">High-temperature liners for acid-resistant and thermal protection.</p>
+      </div>
+      <div class="prod-card reveal d3">
+        <div class="prod-tag">Access</div>
+        <div class="prod-icon">🪜</div>
+        <div class="prod-name">Ladders &amp; Platforms</div>
+        <p class="prod-desc">Safety caged ladders with intermediate rest platforms, IS-coded.</p>
+      </div>
+      <div class="prod-card reveal">
+        <div class="prod-tag">Control</div>
+        <div class="prod-icon">🎚️</div>
+        <div class="prod-name">Dampers &amp; Valves</div>
+        <p class="prod-desc">Manual and motorized damper assemblies for flow regulation.</p>
+      </div>
+      <div class="prod-card reveal d1">
+        <div class="prod-tag">Joinery</div>
+        <div class="prod-icon">⬡</div>
+        <div class="prod-name">Flanges &amp; Gaskets</div>
+        <p class="prod-desc">High-pressure flanges and heat-resistant sealing gaskets.</p>
+      </div>
+      <div class="prod-card reveal d2">
+        <div class="prod-tag">Support</div>
+        <div class="prod-icon">📐</div>
+        <div class="prod-name">Brackets &amp; Guys</div>
+        <p class="prod-desc">Wind-bracing guy wires and structural support brackets.</p>
+      </div>
+      <div class="prod-card reveal d3">
+        <div class="prod-tag">Safety</div>
+        <div class="prod-icon">🔦</div>
+        <div class="prod-name">Aviation Lighting</div>
+        <p class="prod-desc">DGCA-compliant warning lights for tall chimney stacks.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── WHY US ─────────────────────────────────────────────── -->
+  <section id="why">
+    <div class="section-tag">Why Choose Us</div>
+    <h2 class="section-h">Built on <span
+        style="text-decoration:underline;text-decoration-color:rgba(0,0,0,.3)">Trust</span></h2>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <div class="why-num">01</div>
+        <div class="why-title">Complete In-House Capability</div>
+        <p class="why-desc">From design drawings to finished chimney — every step happens under one roof. No outsourcing
+          means tighter quality control and faster delivery.</p>
+      </div>
+      <div class="why-card reveal d1">
+        <div class="why-num">02</div>
+        <div class="why-title">Pan-India Delivery Fleet</div>
+        <p class="why-desc">Our own heavy transport vehicles ensure chimneys reach your site safely, on schedule,
+          without third-party logistics risks.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="why-num">03</div>
+        <div class="why-title">18+ Years Proven Track Record</div>
+        <p class="why-desc">We've delivered 500+ chimneys across 20+ states. Industries trust us because we've stood
+          behind every project we've built.</p>
+      </div>
+      <div class="why-card reveal d3">
+        <div class="why-num">04</div>
+        <div class="why-title">Custom Every Time</div>
+        <p class="why-desc">No two industries are the same. We engineer every chimney to your unique specifications — no
+          off-the-shelf compromises.</p>
+      </div>
+      <div class="why-card reveal d1">
+        <div class="why-num">05</div>
+        <div class="why-title">Competitive Pricing</div>
+        <p class="why-desc">Direct manufacturing eliminates middlemen. You get industrial-grade chimneys at honest,
+          transparent prices with no hidden costs.</p>
+      </div>
+      <div class="why-card reveal d2">
+        <div class="why-num">06</div>
+        <div class="why-title">After-Sale Support</div>
+        <p class="why-desc">Our relationship doesn't end at installation. Annual maintenance contracts, emergency
+          repairs and 24/7 technical support available.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ─────────────────────────────────────── -->
+  <section id="testimonials">
+    <div class="testi-header">
+      <div>
+        <div class="section-tag reveal">Client Voices</div>
+        <h2 class="section-h reveal">What Our <span style="color:var(--yellow)">Clients Say</span></h2>
+      </div>
+      <div class="testi-arrows">
+        <button class="testi-arrow" id="tPrev" aria-label="Previous testimonial">←</button>
+        <button class="testi-arrow" id="tNext" aria-label="Next testimonial">→</button>
+      </div>
+    </div>
+    <div class="testi-viewport">
+      <div class="testi-track" id="testiTrack">
+
+        <div class="testi-card reveal">
+          <div class="testi-qm">"</div>
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"Panchal Brothers delivered a 45-metre MS chimney for our paper mill on time and within
+            budget — flawless fabrication, zero delays. Their transport team handled everything right to our site gate
+            in Vapi."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">RP</div>
+            <div>
+              <div class="testi-name">Rajesh Patel</div>
+              <div class="testi-role">MD, Vapi Paper Mills · Gujarat</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal d1">
+          <div class="testi-qm">"</div>
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"We've worked with three chimney vendors before — none matched Panchal Brothers. Their
+            engineering team calculated our exact stack height for smoke dispersal compliance. Highly recommended."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">SK</div>
+            <div>
+              <div class="testi-name">Suresh Kumar</div>
+              <div class="testi-role">Plant Manager, Nashik Steel · Maharashtra</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal d2">
+          <div class="testi-qm">"</div>
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"Ordered cowl caps, spark arrestors and SS liners in bulk — delivered in one shipment to
+            Rajasthan. Quality exceeded expectations and pricing was far below what we previously paid elsewhere."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">AS</div>
+            <div>
+              <div class="testi-name">Amit Shah</div>
+              <div class="testi-role">Director, Marwar Foundry · Rajasthan</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal">
+          <div class="testi-qm">"</div>
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"Panchal Brothers erected a 60m dual-flue chimney at our Tamil Nadu plant under a very
+            tight schedule. The crew was professional, safety-conscious and handover documentation was complete."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">MI</div>
+            <div>
+              <div class="testi-name">Mohammed Ismail</div>
+              <div class="testi-role">Operations Head, Coimbatore Tex · Tamil Nadu</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testi-card reveal d1">
+          <div class="testi-qm">"</div>
+          <div class="testi-stars"><span>★</span><span>★</span><span>★</span><span>★</span><span>★</span></div>
+          <p class="testi-text">"Called them for an emergency relining job — a team was at our MP plant within 72 hours.
+            The anti-corrosion coating they applied has extended our chimney life by years. After-sale support is second
+            to none."</p>
+          <div class="testi-author">
+            <div class="testi-avatar">VM</div>
+            <div>
+              <div class="testi-name">Vikram Mehta</div>
+              <div class="testi-role">Chief Engineer, Bhopal Chemical Works · MP</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="testi-dots" id="testiDots"></div>
+  </section>
+
+  <!-- ── CONTACT ────────────────────────────────────────────── -->
+  <section id="contact">
+    <div class="section-tag reveal">Reach Out</div>
+    <h2 class="section-h reveal">Let's <span style="color:var(--yellow)">Connect</span></h2>
+    <div class="contact-grid">
+
+      <!-- Left: Info -->
+      <div class="contact-info">
+        <p class="reveal d1">Have a project in mind? Need a custom chimney quote? Our team is ready to help you plan,
+          build and deliver the right industrial chimney solution.</p>
+        <div class="contact-details">
+          <div class="cd-item reveal d1">
+            <div class="cd-icon">📍</div>
+            <div class="cd-text">
+              <strong>Location</strong>
+              <span>GF Ghandhi Chock Tulja Jewelers, Padra, Gujarat – 391440</span>
+            </div>
+          </div>
+          <div class="cd-item reveal d2">
+            <div class="cd-icon">📞</div>
+            <div class="cd-text">
+              <strong>Phone</strong>
+              <span>+91 79904 31730 &nbsp;|&nbsp; +91 79902 90556</span>
+            </div>
+          </div>
+          <div class="cd-item reveal d3">
+            <div class="cd-icon">✉️</div>
+            <div class="cd-text">
+              <strong>Email</strong>
+              <span>meeralpanchal@panchalbrothers.org</span>
+            </div>
+          </div>
+          <div class="cd-item reveal d4">
+            <div class="cd-icon">⏰</div>
+            <div class="cd-text">
+              <strong>Hours</strong>
+              <span>Mon – Sat: 9:00 AM – 6:30 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Form -->
+      <div class="contact-form reveal d2" id="enquiry-form">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f-name">Your Name *</label>
+            <input type="text" id="f-name" class="form-input" placeholder="Full name" autocomplete="name" />
+            <span class="form-error" id="err-name"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-company">Company</label>
+            <input type="text" id="f-company" class="form-input" placeholder="Company name"
+              autocomplete="organization" />
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label" for="f-phone">Phone *</label>
+            <input type="tel" id="f-phone" class="form-input" placeholder="+91 XXXXX XXXXX" autocomplete="tel" />
+            <span class="form-error" id="err-phone"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="f-email">Email *</label>
+            <input type="email" id="f-email" class="form-input" placeholder="your@email.com" autocomplete="email" />
+            <span class="form-error" id="err-email"></span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-service">Service Needed *</label>
+          <select id="f-service" class="form-select">
+            <option value="">Select a service...</option>
+            <option value="Chimney Manufacturing">Chimney Manufacturing</option>
+            <option value="Parts &amp; Components Supply">Parts &amp; Components Supply</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Installation &amp; Erection">Installation &amp; Erection</option>
+            <option value="Maintenance &amp; Repair">Maintenance &amp; Repair</option>
+            <option value="Design Consultation">Design Consultation</option>
+            <option value="Other">Other</option>
+          </select>
+          <span class="form-error" id="err-service"></span>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="f-message">Message / Requirements *</label>
+          <textarea id="f-message" class="form-textarea"
+            placeholder="Describe your chimney requirements — height, diameter, material, timeline..."></textarea>
+          <span class="form-error" id="err-message"></span>
+        </div>
+        <div id="form-banner" style="display:none"></div>
+        <button type="button" id="form-submit" class="form-submit">Send Enquiry →</button>
+      </div>
+
+    </div>
+  </section>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="frontend/favicon.svg" />
+  <link rel="icon" type="image/png" href="frontend/favicon.png" />
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo">
+          <div class="logo-icon"><span></span><span></span><span></span></div>Panchal Brothers
+        </a>
+        <p>Gujarat's trusted industrial chimney manufacturer, supplier and transporter. Engineering reliable chimney
+          solutions since 2005.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Chimney Manufacturing</a></li>
+          <li><a href="#services">Parts Supply</a></li>
+          <li><a href="#services">Transportation</a></li>
+          <li><a href="#services">Installation</a></li>
+          <li><a href="#services">Maintenance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Products</h4>
+        <ul>
+          <li><a href="#products">Shell Sections</a></li>
+          <li><a href="#products">Cowl Caps</a></li>
+          <li><a href="#products">Refractory Liners</a></li>
+          <li><a href="#products">Ladders &amp; Platforms</a></li>
+          <li><a href="#products">Dampers &amp; Valves</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#about">About Us</a></li>
+          <li><a href="#process">Our Process</a></li>
+          <li><a href="#why">Why Choose Us</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 <span>Panchal Brothers</span>. All rights reserved. Padra, Gujarat, India.</p>
+      <p>Built with <span>◆</span> Pride in Gujarat</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+
+</body>
+
+</html>

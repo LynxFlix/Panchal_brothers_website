@@ -1,0 +1,12 @@
+[
+  {
+    "id": "1e44246a-25d2-41ea-b74e-f14fd9a95769",
+    "name": "Panchal Brothers Admin",
+    "email": "admin@panchalbrothers.com",
+    "password": "$2a$12$VLFJ3yVfILw50Ft8/oyJFOvTLz7lbCxHM6Cwly0m6fCSti/RU95/G",
+    "role": "superadmin",
+    "isActive": true,
+    "createdAt": "2026-04-17T03:14:12.770Z",
+    "lastLogin": "2026-04-26T09:53:32.316Z"
+  }
+]

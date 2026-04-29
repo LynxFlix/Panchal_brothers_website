@@ -1,0 +1,1470 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Panel — Panchal Brothers</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@300;400&family=Barlow+Condensed:wght@300;400;600&display=swap"
+    rel="stylesheet" />
+  <style>
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --yellow: #F5C200;
+      --black: #0A0A0A;
+      --gray-dark: #111111;
+      --gray-mid: #1A1A1A;
+      --gray-light: #252525;
+      --white: #F0F0F0;
+      --muted: #777;
+      --green: #22C55E;
+      --red: #EF4444;
+      --blue: #3B82F6;
+      --orange: #F97316;
+      --sidebar-w: 240px;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Barlow Condensed', sans-serif;
+      min-height: 100vh;
+    }
+
+    /* ── LOGIN SCREEN ──────────────────────────────────────── */
+    #login-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--black);
+      background-image: repeating-linear-gradient(90deg, rgba(255, 255, 255, .015) 0, rgba(255, 255, 255, .015) 1px, transparent 1px, transparent 80px),
+        repeating-linear-gradient(0deg, rgba(255, 255, 255, .015) 0, rgba(255, 255, 255, .015) 1px, transparent 1px, transparent 80px);
+    }
+
+    .login-card {
+      width: 420px;
+      padding: 52px 48px;
+      background: var(--gray-dark);
+      border: 1px solid rgba(245, 194, 0, .15);
+    }
+
+    .login-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      letter-spacing: .15em;
+      color: var(--yellow);
+      margin-bottom: 6px;
+    }
+
+    .login-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .2em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .login-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem;
+      letter-spacing: .18em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .login-input {
+      width: 100%;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(245, 194, 0, .2);
+      color: var(--white);
+      padding: 13px 16px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1rem;
+      outline: none;
+      transition: border-color .25s;
+      margin-bottom: 18px;
+    }
+
+    .login-input:focus {
+      border-color: var(--yellow);
+    }
+
+    .login-btn {
+      width: 100%;
+      background: var(--yellow);
+      color: var(--black);
+      padding: 14px;
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .82rem;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all .25s;
+      margin-top: 6px;
+    }
+
+    .login-btn:hover {
+      background: #FFD740;
+    }
+
+    .login-btn:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+    }
+
+    .login-error {
+      color: var(--red);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      margin-top: 12px;
+      min-height: 18px;
+    }
+
+    /* ── DASHBOARD LAYOUT ─────────────────────────────────── */
+    #dashboard {
+      display: none;
+      min-height: 100vh;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: var(--sidebar-w);
+      background: var(--gray-dark);
+      border-right: 1px solid rgba(245, 194, 0, .1);
+      display: flex;
+      flex-direction: column;
+      z-index: 100;
+    }
+
+    .sidebar-brand {
+      padding: 28px 24px 24px;
+      border-bottom: 1px solid rgba(245, 194, 0, .1);
+    }
+
+    .sidebar-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: .12em;
+      color: var(--yellow);
+    }
+
+    .sidebar-brand-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .58rem;
+      letter-spacing: .16em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 2px;
+    }
+
+    .sidebar-nav {
+      flex: 1;
+      padding: 20px 0;
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 24px;
+      font-family: 'Syne', sans-serif;
+      font-size: .78rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted);
+      cursor: pointer;
+      border-left: 3px solid transparent;
+      transition: all .2s;
+      text-decoration: none;
+    }
+
+    .nav-item:hover {
+      color: var(--white);
+      background: rgba(255, 255, 255, .04);
+    }
+
+    .nav-item.active {
+      color: var(--yellow);
+      border-left-color: var(--yellow);
+      background: rgba(245, 194, 0, .06);
+    }
+
+    .nav-item .nav-icon {
+      font-size: 1rem;
+      width: 20px;
+    }
+
+    .sidebar-footer {
+      padding: 20px 24px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+    }
+
+    .admin-info {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .63rem;
+      color: var(--muted);
+      margin-bottom: 12px;
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: 10px;
+      background: transparent;
+      border: 1px solid rgba(245, 194, 0, .2);
+      color: var(--yellow);
+      font-family: 'Syne', sans-serif;
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .logout-btn:hover {
+      background: rgba(245, 194, 0, .1);
+    }
+
+    /* Main content */
+    .main {
+      margin-left: var(--sidebar-w);
+      padding: 38px 42px;
+      min-height: 100vh;
+    }
+
+    .page-header {
+      margin-bottom: 36px;
+    }
+
+    .page-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: var(--white);
+      letter-spacing: .06em;
+    }
+
+    .page-sub {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .64rem;
+      letter-spacing: .15em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: 4px;
+    }
+
+    /* ── STAT CARDS ───────────────────────────────────────── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .stat-card {
+      background: var(--gray-mid);
+      border: 1px solid rgba(255, 255, 255, .06);
+      padding: 24px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color .3s;
+      cursor: default;
+    }
+
+    .stat-card:hover {
+      border-color: rgba(245, 194, 0, .3);
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 3px;
+      height: 100%;
+    }
+
+    .stat-card.yellow::before {
+      background: var(--yellow);
+    }
+
+    .stat-card.green::before {
+      background: var(--green);
+    }
+
+    .stat-card.blue::before {
+      background: var(--blue);
+    }
+
+    .stat-card.orange::before {
+      background: var(--orange);
+    }
+
+    .stat-label-top {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .18em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .stat-value {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.6rem;
+      line-height: 1;
+    }
+
+    .stat-card.yellow .stat-value {
+      color: var(--yellow);
+    }
+
+    .stat-card.green .stat-value {
+      color: var(--green);
+    }
+
+    .stat-card.blue .stat-value {
+      color: var(--blue);
+    }
+
+    .stat-card.orange .stat-value {
+      color: var(--orange);
+    }
+
+    .stat-change {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+
+    /* ── FILTER BAR ───────────────────────────────────────── */
+    .filter-bar {
+      display: flex;
+      gap: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+      background: var(--gray-mid);
+      border: 1px solid rgba(255, 255, 255, .06);
+      padding: 16px 22px;
+      margin-bottom: 22px;
+    }
+
+    .filter-input,
+    .filter-select {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(245, 194, 0, .15);
+      color: var(--white);
+      padding: 10px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      transition: border-color .2s;
+    }
+
+    .filter-input:focus,
+    .filter-select:focus {
+      border-color: var(--yellow);
+    }
+
+    .filter-input {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .filter-select option {
+      background: var(--gray-dark);
+    }
+
+    .filter-btn {
+      padding: 10px 22px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .75rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .filter-btn:hover {
+      background: #FFD740;
+    }
+
+    .count-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      color: var(--muted);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    /* ── TABLE ────────────────────────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    thead th {
+      background: var(--gray-light);
+      padding: 13px 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      letter-spacing: .15em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      transition: background .2s;
+    }
+
+    tbody tr:hover {
+      background: rgba(255, 255, 255, .03);
+    }
+
+    tbody td {
+      padding: 14px 16px;
+      font-size: .88rem;
+      color: var(--white);
+      vertical-align: middle;
+    }
+
+    .td-muted {
+      color: var(--muted);
+      font-size: .8rem;
+    }
+
+    .td-mono {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    /* Status badge */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      font-family: 'Syne', sans-serif;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      border-radius: 2px;
+      white-space: nowrap;
+    }
+
+    .badge::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+    }
+
+    .badge-new {
+      background: rgba(59, 130, 246, .15);
+      color: var(--blue);
+      border: 1px solid rgba(59, 130, 246, .3);
+    }
+
+    .badge-new::before {
+      background: var(--blue);
+    }
+
+    .badge-inprogress {
+      background: rgba(249, 115, 22, .15);
+      color: var(--orange);
+      border: 1px solid rgba(249, 115, 22, .3);
+    }
+
+    .badge-inprogress::before {
+      background: var(--orange);
+    }
+
+    .badge-responded {
+      background: rgba(34, 197, 94, .15);
+      color: var(--green);
+      border: 1px solid rgba(34, 197, 94, .3);
+    }
+
+    .badge-responded::before {
+      background: var(--green);
+    }
+
+    .badge-closed {
+      background: rgba(120, 120, 120, .15);
+      color: var(--muted);
+      border: 1px solid rgba(120, 120, 120, .3);
+    }
+
+    .badge-closed::before {
+      background: var(--muted);
+    }
+
+    .badge-high {
+      background: rgba(239, 68, 68, .12);
+      color: var(--red);
+      border-left: 2px solid var(--red);
+    }
+
+    .badge-medium {
+      background: rgba(245, 194, 0, .1);
+      color: var(--yellow);
+      border-left: 2px solid var(--yellow);
+    }
+
+    .badge-low {
+      background: rgba(34, 197, 94, .1);
+      color: var(--green);
+      border-left: 2px solid var(--green);
+    }
+
+    /* Actions */
+    .action-btn {
+      padding: 6px 14px;
+      font-family: 'Syne', sans-serif;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: all .2s;
+      margin-right: 6px;
+    }
+
+    .action-view {
+      background: rgba(245, 194, 0, .12);
+      color: var(--yellow);
+      border: 1px solid rgba(245, 194, 0, .25);
+    }
+
+    .action-view:hover {
+      background: rgba(245, 194, 0, .22);
+    }
+
+    .action-delete {
+      background: rgba(239, 68, 68, .1);
+      color: var(--red);
+      border: 1px solid rgba(239, 68, 68, .3);
+    }
+
+    .action-delete:hover {
+      background: rgba(239, 68, 68, .2);
+    }
+
+    /* ── PAGINATION ───────────────────────────────────────── */
+    .pagination {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      margin-top: 24px;
+      justify-content: flex-end;
+    }
+
+    .pg-btn {
+      padding: 8px 16px;
+      background: var(--gray-mid);
+      border: 1px solid rgba(255, 255, 255, .1);
+      color: var(--white);
+      font-family: 'Syne', sans-serif;
+      font-size: .74rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .pg-btn:hover:not(:disabled) {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    .pg-btn:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .pg-btn.active {
+      background: var(--yellow);
+      color: var(--black);
+      border-color: var(--yellow);
+    }
+
+    .pg-info {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      margin: 0 8px;
+    }
+
+    /* ── MODAL ────────────────────────────────────────────── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, .85);
+      z-index: 9000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal {
+      background: var(--gray-dark);
+      border: 1px solid rgba(245, 194, 0, .2);
+      width: 100%;
+      max-width: 660px;
+      max-height: 88vh;
+      overflow-y: auto;
+      animation: modalIn .3s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 22px 28px;
+      border-bottom: 1px solid rgba(245, 194, 0, .12);
+    }
+
+    .modal-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: .06em;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.4rem;
+      cursor: pointer;
+      padding: 4px 8px;
+    }
+
+    .modal-close:hover {
+      color: var(--white);
+    }
+
+    .modal-body {
+      padding: 28px;
+    }
+
+    .detail-row {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .05);
+      align-items: start;
+    }
+
+    .detail-key {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .14em;
+      color: var(--yellow);
+      text-transform: uppercase;
+      padding-top: 2px;
+    }
+
+    .detail-val {
+      font-size: .92rem;
+      color: var(--white);
+      line-height: 1.5;
+      word-break: break-word;
+    }
+
+    .modal-actions {
+      padding: 22px 28px;
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .modal-select {
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(245, 194, 0, .2);
+      color: var(--white);
+      padding: 9px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      outline: none;
+    }
+
+    .modal-select option {
+      background: var(--gray-dark);
+    }
+
+    .modal-note {
+      width: 100%;
+      background: rgba(255, 255, 255, .04);
+      border: 1px solid rgba(245, 194, 0, .15);
+      color: var(--white);
+      padding: 10px 14px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: .9rem;
+      outline: none;
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .modal-note:focus {
+      border-color: var(--yellow);
+    }
+
+    .save-btn {
+      padding: 10px 26px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Syne', sans-serif;
+      font-weight: 800;
+      font-size: .76rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background .2s;
+    }
+
+    .save-btn:hover {
+      background: #FFD740;
+    }
+
+    /* ── TOAST ────────────────────────────────────────────── */
+    #toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 99999;
+      background: var(--gray-light);
+      border: 1px solid var(--yellow);
+      padding: 13px 22px;
+      font-family: 'Syne', sans-serif;
+      font-size: .82rem;
+      font-weight: 700;
+      color: var(--white);
+      transform: translateY(80px);
+      opacity: 0;
+      transition: transform .35s, opacity .35s;
+      max-width: 300px;
+    }
+
+    #toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* ── LOADING ──────────────────────────────────────────── */
+    .spinner {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(245, 194, 0, .3);
+      border-top-color: var(--yellow);
+      border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-row td {
+      text-align: center;
+      padding: 48px;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .8rem;
+    }
+
+    .empty-row td {
+      text-align: center;
+      padding: 64px;
+      color: var(--muted);
+      font-size: .88rem;
+    }
+
+    /* Website link */
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted);
+      font-family: 'Syne', sans-serif;
+      font-size: .74rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      transition: color .2s;
+      border-bottom: none;
+    }
+
+    .back-link:hover {
+      color: var(--yellow);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="toast"></div>
+
+  <!-- ── LOGIN ───────────────────────────────────────────── -->
+  <div id="login-screen">
+    <div class="login-card">
+      <div class="login-logo">Panchal Brothers</div>
+      <div class="login-sub">Admin Panel · Secure Access</div>
+      <label class="login-label" for="la-email">Email Address</label>
+      <input type="email" id="la-email" class="login-input" placeholder="admin@panchalbrothers.com"
+        autocomplete="username" />
+      <label class="login-label" for="la-pass">Password</label>
+      <input type="password" id="la-pass" class="login-input" placeholder="••••••••" autocomplete="current-password" />
+      <button id="la-btn" class="login-btn">Login to Admin Panel</button>
+      <div class="login-error" id="la-error"></div>
+    </div>
+  </div>
+
+  <!-- ── DASHBOARD ────────────────────────────────────────── -->
+  <div id="dashboard">
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <div class="sidebar-brand">
+        <div class="sidebar-brand-name">Panchal Brothers</div>
+        <div class="sidebar-brand-sub">Admin Panel</div>
+      </div>
+      <nav class="sidebar-nav">
+        <a class="nav-item active" id="nav-dashboard" onclick="switchPage('dashboard')">
+          <span class="nav-icon">📊</span> Dashboard
+        </a>
+        <a class="nav-item" id="nav-enquiries" onclick="switchPage('enquiries')">
+          <span class="nav-icon">📋</span> Enquiries
+        </a>
+        <a class="nav-item" id="nav-new" onclick="switchPage('enquiries'); filterByStatus('New')">
+          <span class="nav-icon">🆕</span> New Leads
+        </a>
+        <div style="margin-top:auto"></div>
+        <a class="nav-item" href="index.html" target="_blank">
+          <span class="nav-icon">🌐</span> View Website
+        </a>
+      </nav>
+      <div class="sidebar-footer">
+        <div class="admin-info" id="admin-info-txt">Logged in as admin</div>
+        <button class="logout-btn" onclick="logout()">↩ Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+
+      <!-- ── DASHBOARD PAGE ──────────────────────────────── -->
+      <div id="page-dashboard">
+        <div class="page-header">
+          <div class="page-title">Dashboard</div>
+          <div class="page-sub">Overview · Enquiry Statistics</div>
+        </div>
+
+        <div class="stats-row">
+          <div class="stat-card yellow">
+            <div class="stat-label-top">Total Enquiries</div>
+            <div class="stat-value" id="st-total">—</div>
+            <div class="stat-change">All time</div>
+          </div>
+          <div class="stat-card blue">
+            <div class="stat-label-top">New / Unread</div>
+            <div class="stat-value" id="st-new">—</div>
+            <div class="stat-change">Needs response</div>
+          </div>
+          <div class="stat-card orange">
+            <div class="stat-label-top">In Progress</div>
+            <div class="stat-value" id="st-prog">—</div>
+            <div class="stat-change">Being handled</div>
+          </div>
+          <div class="stat-card green">
+            <div class="stat-label-top">Responded</div>
+            <div class="stat-value" id="st-resp">—</div>
+            <div class="stat-change">Completed</div>
+          </div>
+        </div>
+
+        <!-- This month + service breakdown -->
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-bottom:36px;">
+          <div style="background:var(--gray-mid);border:1px solid rgba(255,255,255,.06);padding:26px;">
+            <div
+              style="font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--yellow);text-transform:uppercase;margin-bottom:16px;">
+              This Month</div>
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:3rem;color:var(--white);" id="st-month">—</div>
+            <div style="font-size:.85rem;color:var(--muted);margin-top:4px;">new enquiries</div>
+          </div>
+          <div style="background:var(--gray-mid);border:1px solid rgba(255,255,255,.06);padding:26px;">
+            <div
+              style="font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--yellow);text-transform:uppercase;margin-bottom:14px;">
+              Top Services</div>
+            <div id="st-services" style="display:flex;flex-direction:column;gap:8px;"></div>
+          </div>
+        </div>
+
+        <!-- Recent enquiries quick view -->
+        <div style="background:var(--gray-mid);border:1px solid rgba(255,255,255,.06);padding:26px;">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;">
+            <div
+              style="font-family:'JetBrains Mono',monospace;font-size:.65rem;letter-spacing:.18em;color:var(--yellow);text-transform:uppercase;">
+              Recent Enquiries</div>
+            <button onclick="switchPage('enquiries')"
+              style="background:none;border:1px solid rgba(245,194,0,.25);color:var(--yellow);padding:6px 14px;font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;">View
+              All →</button>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Service</th>
+                  <th>Phone</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody id="recent-tbody">
+                <tr class="loading-row">
+                  <td colspan="5"><span class="spinner"></span> Loading...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── ENQUIRIES PAGE ──────────────────────────────── -->
+      <div id="page-enquiries" style="display:none">
+        <div class="page-header" style="display:flex;justify-content:space-between;align-items:flex-start;">
+          <div>
+            <div class="page-title">Enquiries</div>
+            <div class="page-sub">All form submissions from website</div>
+          </div>
+          <button onclick="loadEnquiries()"
+            style="background:none;border:1px solid rgba(245,194,0,.25);color:var(--yellow);padding:10px 20px;font-family:'Syne',sans-serif;font-size:.74rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;">↻
+            Refresh</button>
+        </div>
+
+        <div class="filter-bar">
+          <input type="text" class="filter-input" id="f-search" placeholder="Search name, email, phone, company..." />
+          <select class="filter-select" id="f-status">
+            <option value="">All Status</option>
+            <option value="New">New</option>
+            <option value="In Progress">In Progress</option>
+            <option value="Responded">Responded</option>
+            <option value="Closed">Closed</option>
+          </select>
+          <select class="filter-select" id="f-service">
+            <option value="">All Services</option>
+            <option value="Chimney Manufacturing">Chimney Manufacturing</option>
+            <option value="Parts & Components Supply">Parts & Components Supply</option>
+            <option value="Transportation">Transportation</option>
+            <option value="Installation & Erection">Installation & Erection</option>
+            <option value="Maintenance & Repair">Maintenance & Repair</option>
+            <option value="Design Consultation">Design Consultation</option>
+            <option value="Other">Other</option>
+          </select>
+          <button class="filter-btn" onclick="applyFilters()">Filter</button>
+          <button class="filter-btn"
+            style="background:transparent;color:var(--muted);border:1px solid rgba(255,255,255,.1);"
+            onclick="clearFilters()">Clear</button>
+          <div class="count-badge" id="enq-count"></div>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Company</th>
+                <th>Phone</th>
+                <th>Service</th>
+                <th>Priority</th>
+                <th>Status</th>
+                <th>Date</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="enq-tbody">
+              <tr class="loading-row">
+                <td colspan="9"><span class="spinner"></span> Loading...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="pagination" id="pagination"></div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── DETAIL MODAL ─────────────────────────────────────── -->
+  <div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+    <div class="modal">
+      <div class="modal-header">
+        <div class="modal-title" id="modal-title">Enquiry Detail</div>
+        <button class="modal-close" onclick="closeModalDirect()">✕</button>
+      </div>
+      <div class="modal-body" id="modal-body"></div>
+      <div class="modal-actions">
+        <label
+          style="font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;color:var(--yellow);text-transform:uppercase;">Status</label>
+        <select class="modal-select" id="modal-status">
+          <option value="New">New</option>
+          <option value="In Progress">In Progress</option>
+          <option value="Responded">Responded</option>
+          <option value="Closed">Closed</option>
+        </select>
+        <label
+          style="font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;color:var(--yellow);text-transform:uppercase;">Priority</label>
+        <select class="modal-select" id="modal-priority">
+          <option value="Low">Low</option>
+          <option value="Medium">Medium</option>
+          <option value="High">High</option>
+        </select>
+        <button class="save-btn" id="modal-save-btn" onclick="saveEnquiry()">Save Changes</button>
+      </div>
+      <div style="padding: 0 28px 22px;">
+        <label
+          style="font-family:'JetBrains Mono',monospace;font-size:.63rem;letter-spacing:.15em;color:var(--yellow);text-transform:uppercase;display:block;margin-bottom:6px;">Admin
+          Note</label>
+        <textarea class="modal-note" id="modal-note" placeholder="Internal notes about this enquiry..."></textarea>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function () {
+      'use strict';
+
+      const API = 'http://127.0.0.1:5000/api';
+      let token = localStorage.getItem('pb_admin_token') || '';
+      let currentEnquiryId = null;
+      let currentPage = 1;
+      let totalPages = 1;
+      let activeFilters = {};
+
+      /* ── TOAST ──────────────────────────────────────────────── */
+      function toast(msg, dur) {
+        const t = document.getElementById('toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), dur || 3500);
+      }
+
+      /* ── AUTH HEADER ────────────────────────────────────────── */
+      function authHeaders() {
+        return { 'Content-Type': 'application/json', 'Authorization': 'Bearer ' + token };
+      }
+
+      /* ── CHECK IF ALREADY LOGGED IN ─────────────────────────── */
+      async function checkAuth() {
+        if (!token) return;
+        try {
+          const res = await fetch(API + '/admin/me', { headers: authHeaders() });
+          if (res.ok) {
+            const data = await res.json();
+            showDashboard(data.admin);
+          } else {
+            token = '';
+            localStorage.removeItem('pb_admin_token');
+          }
+        } catch (_) { }
+      }
+
+      /* ── LOGIN ──────────────────────────────────────────────── */
+      document.getElementById('la-btn').addEventListener('click', async () => {
+        const email = document.getElementById('la-email').value.trim();
+        const password = document.getElementById('la-pass').value;
+        const errEl = document.getElementById('la-error');
+        const btn = document.getElementById('la-btn');
+
+        errEl.textContent = '';
+        if (!email || !password) { errEl.textContent = 'Email and password are required.'; return; }
+
+        btn.disabled = true;
+        btn.textContent = 'Logging in...';
+        try {
+          const res = await fetch(API + '/admin/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password }),
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            token = data.token;
+            localStorage.setItem('pb_admin_token', token);
+            showDashboard(data.admin);
+          } else {
+            errEl.textContent = data.error || 'Login failed. Check your credentials.';
+          }
+        } catch (_) {
+          errEl.textContent = 'Cannot connect to server. Is the backend running?';
+        }
+        btn.disabled = false;
+        btn.textContent = 'Login to Admin Panel';
+      });
+
+      // Press Enter to login
+      document.getElementById('la-pass').addEventListener('keydown', e => {
+        if (e.key === 'Enter') document.getElementById('la-btn').click();
+      });
+
+      /* ── SHOW DASHBOARD ─────────────────────────────────────── */
+      function showDashboard(admin) {
+        document.getElementById('login-screen').style.display = 'none';
+        document.getElementById('dashboard').style.display = 'block';
+        if (admin) {
+          document.getElementById('admin-info-txt').textContent = admin.email;
+        }
+        loadStats();
+        loadRecentEnquiries();
+        loadEnquiries();
+      }
+
+      /* ── LOGOUT ─────────────────────────────────────────────── */
+      window.logout = function () {
+        token = '';
+        localStorage.removeItem('pb_admin_token');
+        document.getElementById('dashboard').style.display = 'none';
+        document.getElementById('login-screen').style.display = 'flex';
+        toast('Logged out.');
+      };
+
+      /* ── PAGE SWITCHING ─────────────────────────────────────── */
+      window.switchPage = function (page) {
+        document.querySelectorAll('[id^="page-"]').forEach(p => p.style.display = 'none');
+        document.getElementById('page-' + page).style.display = 'block';
+        document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+        const nav = document.getElementById('nav-' + page);
+        if (nav) nav.classList.add('active');
+      };
+
+      window.filterByStatus = function (status) {
+        document.getElementById('f-status').value = status;
+        applyFilters();
+      };
+
+      /* ── LOAD STATS ─────────────────────────────────────────── */
+      async function loadStats() {
+        try {
+          const res = await fetch(API + '/admin/enquiries/stats', { headers: authHeaders() });
+          if (!res.ok) return;
+          const data = await res.json();
+          const s = data.stats;
+          document.getElementById('st-total').textContent = s.totalEnquiries;
+          document.getElementById('st-new').textContent = s.newEnquiries;
+          document.getElementById('st-prog').textContent = s.inProgress;
+          document.getElementById('st-resp').textContent = s.responded;
+          document.getElementById('st-month').textContent = s.thisMonth;
+
+          // Service breakdown
+          const svcEl = document.getElementById('st-services');
+          svcEl.innerHTML = '';
+          (s.byService || []).slice(0, 5).forEach(item => {
+            const pct = Math.round((item.count / Math.max(s.totalEnquiries, 1)) * 100);
+            svcEl.innerHTML += `
+          <div>
+            <div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;">
+              <span style="color:var(--white)">${item._id}</span>
+              <span style="color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:.68rem">${item.count}</span>
+            </div>
+            <div style="height:3px;background:rgba(255,255,255,.08);border-radius:2px;">
+              <div style="height:3px;background:var(--yellow);border-radius:2px;width:${pct}%;transition:width .6s"></div>
+            </div>
+          </div>`;
+          });
+        } catch (_) { }
+      }
+
+      /* ── LOAD RECENT (Dashboard) ────────────────────────────── */
+      async function loadRecentEnquiries() {
+        try {
+          const res = await fetch(API + '/admin/enquiries?limit=5&sortBy=createdAt&order=desc', { headers: authHeaders() });
+          if (!res.ok) return;
+          const data = await res.json();
+          const tbody = document.getElementById('recent-tbody');
+          tbody.innerHTML = '';
+          if (!data.data.length) {
+            tbody.innerHTML = '<tr class="empty-row"><td colspan="5">No enquiries yet.</td></tr>';
+            return;
+          }
+          data.data.forEach(e => {
+            tbody.innerHTML += `
+          <tr>
+            <td><strong>${e.name}</strong><br><span class="td-muted">${e.email}</span></td>
+            <td class="td-muted">${e.service}</td>
+            <td class="td-mono">${e.phone}</td>
+            <td>${statusBadge(e.status)}</td>
+            <td class="td-mono">${fmtDate(e.createdAt)}</td>
+          </tr>`;
+          });
+        } catch (_) { }
+      }
+
+      /* ── LOAD ENQUIRIES TABLE ───────────────────────────────── */
+      window.loadEnquiries = async function (page) {
+        page = page || currentPage;
+        const params = new URLSearchParams({
+          page, limit: 15, sortBy: 'createdAt', order: 'desc',
+          ...activeFilters
+        });
+        const tbody = document.getElementById('enq-tbody');
+        tbody.innerHTML = '<tr class="loading-row"><td colspan="9"><span class="spinner"></span> Loading...</td></tr>';
+        try {
+          const res = await fetch(API + '/admin/enquiries?' + params, { headers: authHeaders() });
+          if (!res.ok) { tbody.innerHTML = '<tr class="empty-row"><td colspan="9">Failed to load. Check authentication.</td></tr>'; return; }
+          const data = await res.json();
+          const list = data.data;
+          currentPage = data.pagination.page;
+          totalPages = data.pagination.pages;
+
+          document.getElementById('enq-count').textContent = `${data.pagination.total} enquiries`;
+          tbody.innerHTML = '';
+
+          if (!list.length) {
+            tbody.innerHTML = '<tr class="empty-row"><td colspan="9">No enquiries found.</td></tr>';
+            renderPagination();
+            return;
+          }
+
+          list.forEach(e => {
+            tbody.innerHTML += `
+          <tr>
+            <td class="td-mono">#${e._id.slice(-6).toUpperCase()}</td>
+            <td><strong>${e.name}</strong><br><span class="td-muted">${e.email}</span></td>
+            <td class="td-muted">${e.company || '—'}</td>
+            <td class="td-mono">${e.phone}</td>
+            <td class="td-muted" style="font-size:.82rem">${e.service}</td>
+            <td>${priorityBadge(e.priority)}</td>
+            <td>${statusBadge(e.status)}</td>
+            <td class="td-mono">${fmtDate(e.createdAt)}</td>
+            <td>
+              <button class="action-btn action-view" onclick="openModal('${e._id}')">View</button>
+              <button class="action-btn action-delete" onclick="deleteEnquiry('${e._id}')">Del</button>
+            </td>
+          </tr>`;
+          });
+          renderPagination();
+        } catch (_) {
+          tbody.innerHTML = '<tr class="empty-row"><td colspan="9">Connection error. Is the backend running?</td></tr>';
+        }
+      };
+
+      /* ── FILTERS ────────────────────────────────────────────── */
+      window.applyFilters = function () {
+        activeFilters = {};
+        const search = document.getElementById('f-search').value.trim();
+        const status = document.getElementById('f-status').value;
+        const service = document.getElementById('f-service').value;
+        if (search) activeFilters.search = search;
+        if (status) activeFilters.status = status;
+        if (service) activeFilters.service = service;
+        currentPage = 1;
+        loadEnquiries(1);
+      };
+
+      window.clearFilters = function () {
+        document.getElementById('f-search').value = '';
+        document.getElementById('f-status').value = '';
+        document.getElementById('f-service').value = '';
+        activeFilters = {};
+        currentPage = 1;
+        loadEnquiries(1);
+      };
+
+      /* ── PAGINATION ─────────────────────────────────────────── */
+      function renderPagination() {
+        const el = document.getElementById('pagination');
+        el.innerHTML = '';
+        if (totalPages <= 1) return;
+
+        const prev = document.createElement('button');
+        prev.className = 'pg-btn';
+        prev.textContent = '← Prev';
+        prev.disabled = currentPage <= 1;
+        prev.onclick = () => { currentPage--; loadEnquiries(currentPage); };
+        el.appendChild(prev);
+
+        const info = document.createElement('span');
+        info.className = 'pg-info';
+        info.textContent = `Page ${currentPage} of ${totalPages}`;
+        el.appendChild(info);
+
+        const next = document.createElement('button');
+        next.className = 'pg-btn';
+        next.textContent = 'Next →';
+        next.disabled = currentPage >= totalPages;
+        next.onclick = () => { currentPage++; loadEnquiries(currentPage); };
+        el.appendChild(next);
+      }
+
+      /* ── MODAL ──────────────────────────────────────────────── */
+      window.openModal = async function (id) {
+        currentEnquiryId = id;
+        document.getElementById('modal-body').innerHTML = '<div style="text-align:center;padding:40px"><span class="spinner"></span></div>';
+        document.getElementById('modal-overlay').classList.add('open');
+        try {
+          const res = await fetch(API + '/admin/enquiries/' + id, { headers: authHeaders() });
+          const data = await res.json();
+          const e = data.data;
+          document.getElementById('modal-title').textContent = `Enquiry — ${e.name}`;
+          document.getElementById('modal-status').value = e.status || 'New';
+          document.getElementById('modal-priority').value = e.priority || 'Medium';
+          document.getElementById('modal-note').value = e.adminNote || '';
+          document.getElementById('modal-body').innerHTML = `
+        <div class="detail-row"><span class="detail-key">ID</span><span class="detail-val">#${e._id.slice(-8).toUpperCase()}</span></div>
+        <div class="detail-row"><span class="detail-key">Name</span><span class="detail-val">${e.name}</span></div>
+        <div class="detail-row"><span class="detail-key">Company</span><span class="detail-val">${e.company || '—'}</span></div>
+        <div class="detail-row"><span class="detail-key">Phone</span><span class="detail-val"><a href="tel:${e.phone}" style="color:var(--yellow)">${e.phone}</a></span></div>
+        <div class="detail-row"><span class="detail-key">Email</span><span class="detail-val"><a href="mailto:${e.email}" style="color:var(--yellow)">${e.email}</a></span></div>
+        <div class="detail-row"><span class="detail-key">Service</span><span class="detail-val">${e.service}</span></div>
+        <div class="detail-row"><span class="detail-key">Message</span><span class="detail-val" style="line-height:1.7;white-space:pre-wrap">${e.message}</span></div>
+        <div class="detail-row"><span class="detail-key">Email Sent</span><span class="detail-val">${e.emailSent ? '✅ Yes' : '❌ No'}</span></div>
+        <div class="detail-row"><span class="detail-key">Submitted</span><span class="detail-val">${new Date(e.createdAt).toLocaleString('en-IN')}</span></div>
+        ${e.respondedAt ? `<div class="detail-row"><span class="detail-key">Responded</span><span class="detail-val">${new Date(e.respondedAt).toLocaleString('en-IN')}</span></div>` : ''}
+      `;
+        } catch (_) {
+          document.getElementById('modal-body').innerHTML = '<p style="color:var(--red);padding:20px">Failed to load enquiry.</p>';
+        }
+      };
+
+      window.closeModal = function (e) {
+        if (e.target === document.getElementById('modal-overlay')) closeModalDirect();
+      };
+      window.closeModalDirect = function () {
+        document.getElementById('modal-overlay').classList.remove('open');
+        currentEnquiryId = null;
+      };
+
+      /* ── SAVE ENQUIRY ───────────────────────────────────────── */
+      window.saveEnquiry = async function () {
+        if (!currentEnquiryId) return;
+        const btn = document.getElementById('modal-save-btn');
+        btn.textContent = 'Saving...';
+        btn.disabled = true;
+        try {
+          const res = await fetch(API + '/admin/enquiries/' + currentEnquiryId, {
+            method: 'PUT',
+            headers: authHeaders(),
+            body: JSON.stringify({
+              status: document.getElementById('modal-status').value,
+              priority: document.getElementById('modal-priority').value,
+              adminNote: document.getElementById('modal-note').value.trim(),
+            }),
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            toast('✅ Enquiry updated successfully!');
+            closeModalDirect();
+            loadEnquiries(currentPage);
+            loadStats();
+          } else {
+            toast('⚠️ ' + (data.error || 'Update failed'));
+          }
+        } catch (_) {
+          toast('Connection error.');
+        }
+        btn.textContent = 'Save Changes';
+        btn.disabled = false;
+      };
+
+      /* ── DELETE ENQUIRY ─────────────────────────────────────── */
+      window.deleteEnquiry = async function (id) {
+        if (!confirm('Delete this enquiry? This cannot be undone.')) return;
+        try {
+          const res = await fetch(API + '/admin/enquiries/' + id, {
+            method: 'DELETE', headers: authHeaders()
+          });
+          const data = await res.json();
+          if (res.ok && data.success) {
+            toast('🗑️ Enquiry deleted.');
+            loadEnquiries(currentPage);
+            loadStats();
+            loadRecentEnquiries();
+          } else {
+            toast('⚠️ ' + (data.error || 'Delete failed'));
+          }
+        } catch (_) { toast('Connection error.'); }
+      };
+
+      /* ── HELPERS ────────────────────────────────────────────── */
+      function statusBadge(status) {
+        const map = { 'New': 'new', 'In Progress': 'inprogress', 'Responded': 'responded', 'Closed': 'closed' };
+        return `<span class="badge badge-${map[status] || 'new'}">${status}</span>`;
+      }
+      function priorityBadge(p) {
+        return `<span class="badge badge-${(p || 'medium').toLowerCase()}">${p}</span>`;
+      }
+      function fmtDate(iso) {
+        return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' });
+      }
+
+      /* ── INIT ───────────────────────────────────────────────── */
+      checkAuth();
+
+    })();
+  </script>
+</body>
+
+</html>
