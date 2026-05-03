@@ -409,14 +409,18 @@ app.use((err, req, res, next) => {
   res.status(500).json({ error: 'Internal Server Error' });
 });
 
-// ── START ─────────────────────────────────────────────────────
-connectDB().then(() => {
+// ── START ─────────────────────────────────────────────────
+// On Vercel, the module is imported directly (no listen needed).
+// Locally, we start the server normally.
+connectDB();
+
+if (require.main === module) {
   app.listen(PORT, () => {
     console.log(`🚀  Panchal Brothers Backend running → http://localhost:${PORT}`);
     console.log(`🍃  MongoDB: ${process.env.MONGO_URI || 'mongodb://localhost:27017/panchal_brothers'}`);
     console.log(`🔑  Admin: ${process.env.ADMIN_EMAIL || 'admin@panchalbrothers.com'} / ${process.env.ADMIN_PASSWORD || 'Admin@PB2025'}`);
   });
-});
+}
 
 module.exports = app;
 

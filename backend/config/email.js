@@ -9,10 +9,10 @@ const nodemailer = require('nodemailer');
 
 // ── TRANSPORTER SETUP ────────────────────────────────────────
 const transporter = nodemailer.createTransport({
-  host  : process.env.EMAIL_HOST   || 'smtp.gmail.com',
-  port  : parseInt(process.env.EMAIL_PORT || '587'),
+  host: process.env.EMAIL_HOST || 'smtp.gmail.com',
+  port: parseInt(process.env.EMAIL_PORT || '587'),
   secure: process.env.EMAIL_SECURE === 'true',   // true for port 465
-  auth  : {
+  auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
@@ -72,7 +72,7 @@ const sendCustomerConfirmation = async (enquiry) => {
           <p><strong>Message    :</strong> ${enquiry.message}</p>
         </div>
         <p>In the meantime, feel free to reach us directly:</p>
-        <p>📞 <strong>+91 98250 00000</strong> &nbsp;|&nbsp; ✉️ <strong>info@panchalbrothers.com</strong></p>
+        <p>📞 <strong>+91 98250 00000</strong> &nbsp;|&nbsp; ✉️ <strong>imeeralpanchal@panchalbrothers.org</strong></p>
         <p style="margin-top:24px">
           <span class="badge">ENQUIRY RECEIVED</span>
         </p>
@@ -80,15 +80,15 @@ const sendCustomerConfirmation = async (enquiry) => {
       <div class="footer">
         <p>© ${new Date().getFullYear()} Panchal Brothers. All rights reserved.</p>
         <p>GIDC Industrial Area, Ahmedabad, Gujarat – 382430</p>
-        <p><a href="mailto:info@panchalbrothers.com">info@panchalbrothers.com</a></p>
+        <p><a href="mailto:imeeralpanchal@panchalbrothers.org">imeeralpanchal@panchalbrothers.org</a></p>
       </div>
     </div>
   </body>
   </html>`;
 
   await transporter.sendMail({
-    from   : `"Panchal Brothers" <${process.env.EMAIL_USER}>`,
-    to     : enquiry.email,
+    from: `"Panchal Brothers" <${process.env.EMAIL_USER}>`,
+    to: enquiry.email,
     subject: `✅ Enquiry Received — Panchal Brothers (#${enquiry._id.toString().slice(-8).toUpperCase()})`,
     html,
   });
@@ -120,7 +120,7 @@ const sendAdminNotification = async (enquiry) => {
     <div class="wrapper">
       <div class="header">
         <h1>🔔 New Enquiry Received</h1>
-        <p>Panchal Brothers Website — ${new Date().toLocaleDateString('en-IN', {day:'numeric',month:'long',year:'numeric'})}</p>
+        <p>Panchal Brothers Website — ${new Date().toLocaleDateString('en-IN', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
       </div>
       <div class="body">
         <p><span class="new-badge">NEW</span></p>
@@ -142,8 +142,8 @@ const sendAdminNotification = async (enquiry) => {
   </html>`;
 
   await transporter.sendMail({
-    from   : `"Panchal Brothers Website" <${process.env.EMAIL_USER}>`,
-    to     : process.env.COMPANY_EMAIL,
+    from: `"Panchal Brothers Website" <${process.env.EMAIL_USER}>`,
+    to: process.env.COMPANY_EMAIL,
     subject: `🔔 New Enquiry: ${enquiry.name} — ${enquiry.service}`,
     html,
   });
