@@ -1101,7 +1101,7 @@
     (function () {
       'use strict';
 
-      const API = 'http://127.0.0.1:5000/api';
+      const API = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' ? 'http://localhost:5000/api' : '/api';
       let token = localStorage.getItem('pb_admin_token') || '';
       let currentEnquiryId = null;
       let currentPage = 1;
