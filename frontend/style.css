@@ -234,18 +234,19 @@ nav.scrolled {
     display: none;
     position: fixed;
     top: 0;
-    right: -280px;
+    right: 0;
     width: 260px;
     height: 100vh;
     background: var(--gray-dark);
     border-left: 1px solid rgba(245, 194, 0, .15);
     z-index: 1100;
     padding: 80px 32px 40px;
-    transition: right .35s cubic-bezier(.4, 0, .2, 1);
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.4, 0, .2, 1);
 }
 
 .mobile-nav.open {
-    right: 0;
+    transform: translateX(0);
 }
 
 .mobile-nav-links {
@@ -273,7 +274,7 @@ nav.scrolled {
     color: var(--yellow);
 }
 
-.mob-cta {
+.mobile-nav-cta {
     display: inline-block;
     margin-top: 28px;
     background: var(--yellow);
