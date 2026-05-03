@@ -47,16 +47,28 @@ const adminSchema = new mongoose.Schema({
 const Enquiry = mongoose.model('Enquiry', enquirySchema);
 const Admin = mongoose.model('Admin', adminSchema);
 
-// ── CONNECT TO MONGODB ────────────────────────────────────────
+// ── CONNECT TO MONGODB (with serverless connection caching) ──
+// Caching the connection promise avoids creating a new connection
+// on every serverless function invocation (Vercel warm restarts).
+let _dbConnPromise = null;
+
 async function connectDB() {
-  try {
-    await mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/panchal_brothers');
-    console.log('✅  MongoDB connected');
-    await seedAdmin();
-  } catch (err) {
-    console.error('❌  MongoDB connection failed:', err.message);
-    process.exit(1);
-  }
+  if (_dbConnPromise) return _dbConnPromise;          // reuse cached
+  if (mongoose.connection.readyState >= 1) return;   // already connected
+
+  _dbConnPromise = mongoose
+    .connect(process.env.MONGO_URI || 'mongodb://localhost:27017/panchal_brothers')
+    .then(async () => {
+      console.log('✅  MongoDB connected');
+      await seedAdmin();
+    })
+    .catch(err => {
+      _dbConnPromise = null;  // allow retry on next request
+      console.error('❌  MongoDB connection failed:', err.message);
+      // Do NOT call process.exit(1) — it kills Vercel function containers
+    });
+
+  return _dbConnPromise;
 }
 
 // ── SEED ADMIN ON FIRST RUN ───────────────────────────────────
@@ -410,16 +422,20 @@ app.use((err, req, res, next) => {
 });
 
 // ── START ─────────────────────────────────────────────────
-// On Vercel, the module is imported directly (no listen needed).
-// Locally, we start the server normally.
-connectDB();
-
+// • On Vercel: module is required by api/index.js — connectDB is
+//   called lazily per-request (mongoose buffers commands until ready).
+// • Locally:   we call connectDB then listen normally.
 if (require.main === module) {
-  app.listen(PORT, () => {
-    console.log(`🚀  Panchal Brothers Backend running → http://localhost:${PORT}`);
-    console.log(`🍃  MongoDB: ${process.env.MONGO_URI || 'mongodb://localhost:27017/panchal_brothers'}`);
-    console.log(`🔑  Admin: ${process.env.ADMIN_EMAIL || 'admin@panchalbrothers.com'} / ${process.env.ADMIN_PASSWORD || 'Admin@PB2025'}`);
+  connectDB().then(() => {
+    app.listen(PORT, () => {
+      console.log(`🚀  Panchal Brothers Backend running → http://localhost:${PORT}`);
+      console.log(`🍃  MongoDB: ${process.env.MONGO_URI || 'mongodb://localhost:27017/panchal_brothers'}`);
+      console.log(`🔑  Admin: ${process.env.ADMIN_EMAIL || 'admin@panchalbrothers.com'} / ${process.env.ADMIN_PASSWORD || 'Admin@PB2025'}`);
+    });
   });
+} else {
+  // Running as a Vercel serverless function — connect on first request
+  connectDB();
 }
 
 module.exports = app;
