@@ -66,12 +66,8 @@ Auth     : JWT + Bcryptjs
 Email    : Nodemailer + Gmail SMTP
 Security : Helmet, CORS, express-rate-limit, express-validator
 
-Login credential:- 
-──────────────
-Superadmin: admin@panchalbrothers.com / Admin@PB2025
-New admin: meeral@panchalbrothers.org / Meeral@2025
 
-Runner code:-
+Runner code locally:-
 ──────────────
 \backend :-  node server.js
 \frontend :- npx -y serve . -p 3000
