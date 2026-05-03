@@ -203,6 +203,7 @@ nav.scrolled {
     border: none;
     cursor: pointer;
     padding: 4px;
+    margin-right: 12px;
     z-index: 1100;
 }
 
